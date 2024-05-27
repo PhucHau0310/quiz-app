@@ -53,7 +53,7 @@ export default function Home() {
             try {
                 if (session?.user?.id) {
                     const res = await fetch(
-                        `/api/user/profile/${session?.user?.id}`
+                        `${process.env.NEXT_PUBLIC_API_URL}/api/user/profile/${session?.user?.id}`
                     );
                     const data: DataUser = await res.json();
                     setDataUser(data);
@@ -69,7 +69,9 @@ export default function Home() {
     useEffect(() => {
         const getAllQuiz = async () => {
             try {
-                const quizzes = await fetch(`/api/quiz`);
+                const quizzes = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/quiz`
+                );
                 const res = await quizzes.json();
                 const shuffledQuizzes = res.sort(() => 0.5 - Math.random());
                 const selectedQuizzes = shuffledQuizzes.slice(0, 10);
@@ -116,14 +118,17 @@ export default function Home() {
                     userId: session?.user.id,
                     score: scoreLast,
                 };
-                const res = await fetch(`/api/user/${session?.user.id}/score`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // 'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: JSON.stringify(data),
-                });
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/user/${session?.user.id}/score`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify(data),
+                    }
+                );
                 const result = await res.json();
                 console.log(result);
             }
