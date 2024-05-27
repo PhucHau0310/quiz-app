@@ -53,7 +53,7 @@ export default function Home() {
             try {
                 if (session?.user?.id) {
                     const res = await fetch(
-                        `https://quiz-m9rcerfua-hau-nguyens-projects.vercel.app/api/user/profile/${session?.user?.id}`
+                        `https://quiz-app-lemon-one.vercel.app/api/user/profile/${session?.user?.id}`
                     );
                     const data: DataUser = await res.json();
                     setDataUser(data);
@@ -70,7 +70,7 @@ export default function Home() {
         const getAllQuiz = async () => {
             try {
                 const quizzes = await fetch(
-                    `https://quiz-m9rcerfua-hau-nguyens-projects.vercel.app/api/quiz`
+                    `https://quiz-app-lemon-one.vercel.app/api/quiz`
                 );
                 const res = await quizzes.json();
                 const shuffledQuizzes = res.sort(() => 0.5 - Math.random());
@@ -119,7 +119,7 @@ export default function Home() {
                     score: scoreLast,
                 };
                 const res = await fetch(
-                    `https://quiz-m9rcerfua-hau-nguyens-projects.vercel.app/api/user/${session?.user.id}/score`,
+                    `https://quiz-app-lemon-one.vercel.app/api/user/${session?.user.id}/score`,
                     {
                         method: 'POST',
                         headers: {
